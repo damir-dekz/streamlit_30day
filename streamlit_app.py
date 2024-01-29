@@ -2,35 +2,40 @@ import numpy as np
 import altair as alt
 import pandas as pd
 import streamlit as st
+from ydata_profiling import ProfileReport
 from datetime import time, datetime
 
-st.header('st.slider')
+st.set_page_config(layout="wide")
 
-# Example 1
+st.title('How to layout your Streamlit app')
 
-st.subheader('Slider')
+with st.expander("About this app"):
+    st.write("This app shows the various ways on how you can layout your Streamlit app.")
+    st.image('https://streamlit.io/images/brand/streamlit-logo-secondary-colormark-darktext.png', width=250)
 
-# Example 2
+st.sidebar.header('Input')
+user_name = st.sidebar.text_input('What is your name?')
+user_emoji = st.sidebar.selectbox('Choose an emoji', ['', '😄', '😆', '😊', '😍', '😴', '😕', '😱'])
+user_food = st.sidebar.selectbox('What is your favorite food?', ['', 'Tom Yum Kung', 'Burrito', 'Lasagna', 'Hamburger', 'Pizza'])
 
-age = st.slider('How old are you?', min_value=0,max_value=130)
-st.write("I'm", age, "years old")
+st.header("Output")
+col1, col2, col3 = st.columns(3)
 
-# Example 3
-st.subheader("Range slider")
-values = st.slider('Select a range of values', 0.0, 100.0, (25.0, 75.0))
-st.write('Values:', values)
+with col1:
+    if user_name != '':
+        st.write(f'Hello {user_name}')
+    else:
+        st.write('Please enter your **name**!')
 
-# Example 4
+with col2:
+    if user_emoji != '':
+        st.write(f'{user_food} is your favorite **emoji**!')
+    else:
+        st.write('Please choose an **emoji**!')
 
-st.subheader("Range time slider")
-appointment = st.slider("Schedule your appointment:",
-                        value=(time(11, 30), time(12, 45)))
-st.write("You're scheduled for:", appointment)
-
-# Example 5
-
-st.subheader("Datetime slider")
-start_time = st.slider("When do you start?",
-                       value=datetime(2020, 1, 1, 9, 30),
-                       format="MM/DD/YY - hh:mm")
-st.write("Start time:", start_time)
+with col3:
+    if user_food != '':
+        st.write(f"**{user_food}** is your favorite **food**!")
+    else:
+        st.write('Please choose your favorite **food**!')
+        
