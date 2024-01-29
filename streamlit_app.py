@@ -2,7 +2,6 @@ import numpy as np
 import altair as alt
 import pandas as pd
 import streamlit as st
-from ydata_profiling import ProfileReport
 from datetime import time, datetime
 
 st.set_page_config(layout="wide")
